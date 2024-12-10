@@ -1,0 +1,3 @@
+api-backend/node_modules/
+chat-frontend/node_modules
+api-backend/.env

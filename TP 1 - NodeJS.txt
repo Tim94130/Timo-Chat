@@ -1,0 +1,123 @@
+IMPLEMENTATION DE NOTRE LOGIQUE EN NODEJS.
+
+Nous avons réalisé une API en NodeJS a l'aide de Express et MongoDB.
+Nous avons mis en place les routes et fonctionnalitées nécessaires 
+pour gérer et manipuler des données "Users".
+Nous avons mis en place une authentification avec JWT.
+Nous avons tout les éléments pour continuer a faire notre application.
+
+Nous voulons a présent réaliser une API qui gère des produits et des commandes
+afin de simuler le fonctionnement d'un site Ecommerce.
+
+Nous voulons mettre en place les tables de données suivantes :
+
+- Products
+  title
+  description
+  price
+  createdAt
+  updatedAt
+
+- Orders
+  userId
+  productsIds
+  createdAt
+  updatedAt
+
+  Pour ceci, nous allons devoir mettre en place de nouvelles routes, qui appelleront
+  de nouvelles fonction de notre nouveau controller, qui lui même utiliseras nos
+  nouveaux modèles.
+  L'idée étant de valider les données et de documenter l'api au passage.
+ 
+ ----------------------------
+
+  Si jamais vous avez déja une idée de quelque chose que vous voulez réaliser, autre que une simulation de Ecommerce. Mes seules conditions sont les suivantes :
+
+  1. Rajouter au moins 2 tables supplémentaires
+  2. Mettez en place le CRUD et etc... pour ces 2 tables
+  3. Mettez en place la documentation Swagger et la validation de données.
+
+----------------------------
+
+EXERCICE API / WEBSOCKETS :
+
+Nous avons mis en place une API simple qui gère la manipulation des Users, et potentiellement des produits et des commandes.
+Nous avons mis en place aussi un système de Websockets qui dialogue avec une application Front, permettant de relayer des messages entre des utilisateurs connectés.
+
+Nous voulons a présent mettre en place différentes fonctionnalitées pour aller plus loin dans le développement de cette application.
+
+OBJECTIF 1 : Enregistrer les messages dans MongoDB.
+
+  Créer une table "messages", et faire persister en base de donnée les messages envoyés
+  Au moment de la connexion, charger l'historique des messages et l'afficher côté client
+
+OBJECTIF 2 : Enregistrer des "conversations" dans MongoDB
+
+  Créer une table "conversations" dans laquelle vous stocker les informations liées a une conversation particulière.
+
+OBJECTIF 3 : Enregistrer l'historique de connexion dans MongoDB
+
+  Créer une table UserSession, enregistrer a chaque fois qu'un utilisateur se connecte ou éconnecte.
+
+OBJECTIF 4 : Filtrer/modérer les messages envoyés sur le chat
+
+  Créer un système qui me permette de créer une liste de mots "interdits" et qui
+  les remplace par des "**"
+
+OBJECTIF 5 : Gérer les déconnexions pour les profils inactifs
+
+  Mettez en place un système qui va déconnecter un utilisateur si il n'a pas été actif depuis plus de 5 minutes
+
+OBJECTIF 6 :  Système de "Statut" pour les users
+
+  Mettez en place un système de "statut" pour les utilisateur, afin de savoir si celui
+  ci est "en ligne", "hors ligne", etc...
+
+  OBJECTIF 7 : 
+
+  - Le "is tpying" ne disparait uniquement que lorsque l'on envoie le message. pas lorsqu'on l'efface
+  - Si un utilisateur est dans la conv "All", et l'autre dans une conv privé. le "is typing" s'affiche quand meme
+
+
+TP NODE JS - Développement d'API
+--------------------------------
+
+Corriger les bugs :
+
+  Le "is typing" ne disparait uniquement que lorsque l'on envoie le message, pas lorsqu'on l'efface
+  Si un utilisateur est dans la conv "All", et l'autre dans une conv privé. Le "is typing" s'affiche quand même
+
+Limitation de Fréquence des Messages (Anti-Spam)  DONE
+
+  Objectif : Empêcher les utilisateurs d’envoyer des messages trop rapidement (anti-spam).
+  Détails : Implémente une limite de fréquence, par exemple un message par seconde, en utilisant un objet pour stocker les dernières heures d'envoi de message de chaque socket.id. Si un utilisateur tente d'envoyer un message trop tôt, le serveur ignore ce message.
+
+Notification des Connexions et Déconnexions (probleme sur la deconnexion) DONE
+
+  Objectif : Envoyer une notification à tous les utilisateurs lorsqu’un nouvel utilisateur se connecte ou se déconnecte.
+  Détails : Lorsqu’un utilisateur rejoint ou quitte le chat, diffuse un message aux autres utilisateurs, par exemple “Un utilisateur a rejoint le chat” ou “Un utilisateur a quitté le chat”. Cela ajoute un aspect social au chat et est facile à implémenter en utilisant socket.broadcast.emit ou io.emit.
+
+Gestion des déconnexions inactives (Déconnexion automatique) DONE
+
+  Objectif : Déconnecter automatiquement les utilisateurs inactifs.
+  Détails : Mets en place un système qui déconnecte les utilisateurs après une période d'inactivité (par exemple, 10 minutes). Utilise un setTimeout ou un setInterval côté serveur pour surveiller l’activité de chaque utilisateur. Réinitialise le compteur chaque fois qu’un message est envoyé ou reçu.
+
+Message de Bienvenue Personnalisé pour Nouveaux Connectés DONE
+
+  Objectif : Envoyer un message de bienvenue unique à chaque utilisateur lorsqu'il se connecte.
+  Détails : Lorsqu’un utilisateur se connecte, le serveur lui envoie un message de bienvenue, par exemple “Bienvenue dans le chat !”. Tu peux personnaliser le message en incluant l’heure de connexion ou un message aléatoire parmi une liste prédéfinie.
+
+Préparation de la BDD a recevoir des conversations et des messages DONE
+
+  Objectif : Créer les modules necessaires pour que les messages et conversations soient enregistrées dans la base de donnée
+  Détails : Créer les tables/controller/routes pour pouvoir manipuler les data "messages" et "conversations". Ensuite, tentez d'utiliser ceci pour effectivement push les données sur la BDD
+
+Système de Statut “En Ligne/Inactif” Basé sur l’Inactivité DONE
+
+  Objectif : Mettre en place un système de statut d'activité basé sur le temps d’inactivité de chaque utilisateur.
+  Détails : Enregistre le dernier moment d’activité de chaque utilisateur (socket.id). Si aucun message ou interaction n’a lieu après 5 minutes, change leur statut en “inactif” et envoie une notification aux autres utilisateurs indiquant que l’utilisateur est inactif. Le statut redevient “en ligne” dès qu’un message est envoyé.
+
+Ajout d’un “ChatBot” qui Répond aux Commandes de l’Utilisateur DONE
+
+  Objectif : Ajouter un bot qui réagit à des commandes spécifiques envoyées par les utilisateurs.
+  Détails : Implémente un simple chatbot qui répond à certaines commandes (!help, !joke, etc.) en reconnaissant ces mots-clés dans les messages. Par exemple, si un utilisateur tape “!help”, le bot peut envoyer une liste de commandes disponibles. Utilise io.emit pour envoyer la réponse du bot à tous ou socket.emit pour l’envoyer uniquement à l'utilisateur.
