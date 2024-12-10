@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import './App.css';
+import './styles/chat.css';
+
+
 
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';

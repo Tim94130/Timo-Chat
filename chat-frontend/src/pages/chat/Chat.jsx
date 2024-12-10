@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMugHot, faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons';
 import { io } from 'socket.io-client';
+import '../../styles/chat.css';
+
 
 const socket = io('http://localhost:4001');
 
@@ -132,7 +134,7 @@ function Chat() {
 
   return (
     <>
-      <h1 className="title">☕ iChat</h1>
+      <h1 className="title">Timo-Chat</h1>
       <div className="fullBody">
         <div className="main flex">
           <div className="userList">
